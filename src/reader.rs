@@ -694,7 +694,7 @@ pub trait Reader<'a, C: Context>: Sized {
     {
       let bytesize = length
         .checked_mul(std::mem::size_of::<Pair<K, V>>())
-        .ok_or_else(|| crate::error::error_too_big_usize_for_this_architecture())?;
+        .ok_or_else(crate::error::error_too_big_usize_for_this_architecture)?;
 
       if let Some(bytes) = self.read_bytes_borrowed_from_reader(bytesize) {
         let bytes = bytes?;
