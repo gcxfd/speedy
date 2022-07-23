@@ -1,17 +1,17 @@
 use crate::endianness::Endianness;
 
 pub trait Context {
-    type Error: From< crate::Error > + crate::IsEof;
-    fn endianness( &self ) -> Endianness;
+  type Error: From<crate::Error> + crate::IsEof;
+  fn endianness(&self) -> Endianness;
 }
 
 impl Context for Endianness {
-    type Error = crate::Error;
+  type Error = crate::Error;
 
-    #[inline(always)]
-    fn endianness( &self ) -> Endianness {
-        *self
-    }
+  #[inline(always)]
+  fn endianness(&self) -> Endianness {
+    *self
+  }
 }
 
 #[derive(Default)]
@@ -21,27 +21,30 @@ pub struct LittleEndian {}
 pub struct BigEndian {}
 
 impl Context for LittleEndian {
-    type Error = crate::Error;
+  type Error = crate::Error;
 
-    #[inline(always)]
-    fn endianness( &self ) -> Endianness {
-        Endianness::LittleEndian
-    }
+  #[inline(always)]
+  fn endianness(&self) -> Endianness {
+    Endianness::LittleEndian
+  }
 }
 
 impl Context for BigEndian {
-    type Error = crate::Error;
+  type Error = crate::Error;
 
-    #[inline(always)]
-    fn endianness( &self ) -> Endianness {
-        Endianness::BigEndian
-    }
+  #[inline(always)]
+  fn endianness(&self) -> Endianness {
+    Endianness::BigEndian
+  }
 }
 
 pub trait DefaultContext {
-    type Context;
+  type Context;
 }
 
-impl< T > DefaultContext for T where T: ?Sized {
-    type Context = LittleEndian;
+impl<T> DefaultContext for T
+where
+  T: ?Sized,
+{
+  type Context = LittleEndian;
 }
