@@ -1,3 +1,4 @@
+#![feature(new_uninit)]
 #![cfg_attr(feature = "external_doc", doc = include_str!("../README.md"))]
 
 mod error;
