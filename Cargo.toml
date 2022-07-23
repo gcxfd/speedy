@@ -28,6 +28,7 @@ tempfile = "3.3.0"
 
 [profile.release]
 panic = "abort"
+lto = true
 
 [workspace]
 members = [".", "speedy-derive", "static-tests"]
@@ -38,3 +39,6 @@ external_doc = []
 
 [package.metadata.docs.rs]
 features = ["external_doc"]
+
+[profile.bench]
+lto = true
